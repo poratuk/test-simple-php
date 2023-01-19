@@ -137,23 +137,7 @@
         </div>
       </div>
     </div>
-    <!-- Display modal after submiting form -->
-    <div class="modal" tabindex="-1" id="success-modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Success</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <h3> You are successfully saved your data </h3>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" onclick="closeModals()">Close </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <!-- Display modal after submiting form -->
     <div class="modal" tabindex="-1" id="select-modal">
       <div class="modal-dialog">
@@ -174,10 +158,11 @@
                 </div>
               </div>
               <div id="selected-format-output" class="card mt-3 mb-3"></div>
+              <div id="saved-status" class="p-3 border rounded-3"> </div>
             </section>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="saveUserData()">Save </button>
+            <button id="save-address-button" type="button" class="btn btn-primary" onclick="saveUserData()">Save </button>
           </div>
         </div>
       </div>

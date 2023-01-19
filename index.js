@@ -17,12 +17,15 @@ var uspsData = {
 
 const errorModal = new bootstrap.Modal('#error-usps')
 const selectModal = new bootstrap.Modal('#select-modal')
-const successModal = new bootstrap.Modal('#success-modal')
 
 
 // Close all modals if error was closed
 const errorModalNode = document.getElementById('error-usps')
 errorModalNode.addEventListener('hidden.bs.modal', event => {
+  hideModals();
+})
+const selectModalNode = document.getElementById('select-modal')
+selectModalNode.addEventListener('hidden.bs.modal', event => {
   hideModals();
 })
 
@@ -68,7 +71,6 @@ function hideModals() {
   showButton(false)
   errorModal.hide();
   selectModal.hide();
-  successModal.hide();
 }
 
 function saveUserInputData() {
@@ -111,7 +113,7 @@ function checkDataInUsps() {
           printUSPSDataInModal();
           selectModal.show();
         } else {
-          displayError('Error on get data from USPS', "SOme undefined error")
+          displayError('Error on get data from USPS 21212', "SOme undefined error")
         }
       } 
   };
@@ -122,6 +124,10 @@ function checkDataInUsps() {
 
 
 function printUSPSDataInModal() {
+  const status = document.getElementById('saved-status')
+  if (status) {
+    status.classList.add('d-none')
+  }
   const data = sendedUspsFormat ? {...uspsData} : {...userData}
   var div = document.getElementById('selected-format-output')
   if (div) {
@@ -156,11 +162,47 @@ function saveUserData() {
   const data = sendedUspsFormat ? {...uspsData} : {...userData}
 
   var request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
+  request.onreadystatechange = async function() {
       if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText )
+        const status = document.getElementById('saved-status')
+        const json = JSON.parse(request.responseText);
+        if (json.success) {
+          if (status) {
+            status.innerHTML = json.message
+            status.classList.remove('d-none')
+            status.classList.remove('bg-danger-subtle')
+            status.classList.remove('text-danger-emphasis')
+            status.classList.remove('border-danger-emphasis')
+            status.classList.add('bg-success-subtle')
+            status.classList.add('text-success-emphasis')
+            status.classList.add('border-success-emphasis')
+            // Close modals when showed success
+            var but = document.getElementById('save-address-button')
+            console.log(but)
+            if (but) {
+              but.classList.add('d-none')
+            }
+            setTimeout(() => {
+              hideModals()
+              but.classList.add('d-inline')
+            }, 10000)
+          }
+        } else {
+          status.innerHTML = json.error
+          status.classList.remove('d-none')
+          
+          status.classList.add('bg-danger-subtle')
+          status.classList.add('text-danger-emphasis')
+          status.classList.add('border-danger-emphasis')
+          status.classList.remove('bg-success-subtle')
+          status.classList.remove('text-success-emphasis')
+          status.classList.remove('border-success-emphasis')
+        }
       } else {
-        displayError('Error on get data from USPS', "SOme undefined error")
+        if (this.status !== 200 && this.status !== 0) {
+          console.log(this.status)
+          displayError('Error on get data from USPS', "SOme undefined error")
+        }
       }
   };
   
@@ -171,6 +213,7 @@ function saveUserData() {
 
 
 function displayError(title = 'Error', message = "Internal error") {
+  console.log(title)
   const ttl = document.getElementById('error-title')
   if (ttl) {
     ttl.innerHTML = title
@@ -180,10 +223,4 @@ function displayError(title = 'Error', message = "Internal error") {
     err.innerHTML = message
   }
   errorModal.show();
-}
-
-
-
-function closeModals() {
-
 }
