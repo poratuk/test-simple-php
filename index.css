@@ -1,0 +1,6 @@
+.spinner-grow:not(:first-child) {
+  animation-delay: 200ms;
+}
+.spinner-grow:last-child {
+  animation-delay: 400ms;
+}

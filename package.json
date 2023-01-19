@@ -1,0 +1,9 @@
+{
+  "name": "test-simple-php-form-usps",
+  "version": "1.0.0",
+  "description": "Simple package",
+  "main": "index.js",
+  "repository": "https://github.com/poratuk/test-simple-php",
+  "author": "Andrii Cherytsya <PoraTuK@gmail.com>",
+  "license": "MIT"
+}
