@@ -132,7 +132,7 @@
             <div id="error-message"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" onclick="closeModals()">Close </button>
+            <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" onclick="hideModals()">Close </button>
           </div>
         </div>
       </div>

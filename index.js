@@ -107,13 +107,27 @@ function checkDataInUsps() {
         var xmlDoc = request.responseXML; //important to use responseXML here
         if (xmlDoc && xmlDoc.childNodes[0]?.childNodes[0]) {
           const nodes = xmlDoc.childNodes[0].childNodes[0].childNodes
-          for (const i in nodes) {
-            uspsData[nodes[i].tagName] = nodes[i].innerHTML
+          // If we have return error on Address - display error
+          if (nodes.length === 1) {
+            if (nodes[0].tagName == 'Error') {
+              const errTextTag = xmlDoc.getElementsByTagName('Description')
+              if (errTextTag.length) {
+                displayError('Error on get data from USPS', errTextTag[0].innerHTML )
+                return;
+              }
+            } 
+            displayError('Error on get data from USPS', nodes.innerHTML)
+            
+            
+          } else {
+            for (const i in nodes) {
+              uspsData[nodes[i].tagName] = nodes[i].innerHTML
+            }
+            printUSPSDataInModal();
+            selectModal.show();
           }
-          printUSPSDataInModal();
-          selectModal.show();
         } else {
-          displayError('Error on get data from USPS 21212', "SOme undefined error")
+          displayError('Error on get data from USPS', "Some undefined error")
         }
       } 
   };
@@ -178,7 +192,6 @@ function saveUserData() {
             status.classList.add('border-success-emphasis')
             // Close modals when showed success
             var but = document.getElementById('save-address-button')
-            console.log(but)
             if (but) {
               but.classList.add('d-none')
             }
@@ -200,7 +213,6 @@ function saveUserData() {
         }
       } else {
         if (this.status !== 200 && this.status !== 0) {
-          console.log(this.status)
           displayError('Error on get data from USPS', "SOme undefined error")
         }
       }
@@ -213,7 +225,6 @@ function saveUserData() {
 
 
 function displayError(title = 'Error', message = "Internal error") {
-  console.log(title)
   const ttl = document.getElementById('error-title')
   if (ttl) {
     ttl.innerHTML = title
