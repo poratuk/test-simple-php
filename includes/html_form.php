@@ -23,21 +23,21 @@
           <div class="row">
             <div class="col-12 mb-3">
               <label for="Address1" class="form-label text-black-50">Address line 1</label>
-              <input class="form-control" name="Address1" id="Address1" minlength="3" placeholder="Address line 1" autocomplete="address-line1" value="Suite 6100"/>
+              <input class="form-control" name="Address1" id="Address1" minlength="3" placeholder="Address line 1" autocomplete="address-line1"/>
               <div class="invalid-feedback"> Please fill field with minimum of 3 characters </div>
             </div>
           </div>
           <div class="row">
             <div class="col-12 mb-3">
               <label for="Address2" class="form-label text-black-50">Address line 2</label>
-              <input class="form-control" name="Address2" id="Address2" required minlength="3" placeholder="Address line 2" autocomplete="address-line2" value="181 Berry St"/>
+              <input class="form-control" name="Address2" id="Address2" required minlength="3" placeholder="Address line 2" autocomplete="address-line2"/>
               <div class="invalid-feedback"> Please fill field with minimum of 3 characters </div>
             </div>
           </div>
           <div class="row">
             <div class="col-12 mb-3">
               <label for="City" class="form-label text-black-50">City</label>
-              <input class="form-control" name="City" id="City" required minlength="3" placeholder="City" autocomplete="address-level2" value="San Francisco"/>
+              <input class="form-control" name="City" id="City" required minlength="3" placeholder="City" autocomplete="address-level2"/>
               <div class="invalid-feedback"> Please fill field with minimum of 3 characters </div>
             </div>
           </div>
@@ -50,7 +50,7 @@
                 <option value="AL">Alabama</option>
                 <option value="AR">Arkansas</option>
                 <option value="AZ">Arizona</option>
-                <option value="CA" selected>California</option>
+                <option value="CA">California</option>
                 <option value="CO">Colorado</option>
                 <option value="CT">Connecticut</option>
                 <option value="DC">District of Columbia</option>
@@ -105,7 +105,7 @@
           <div class="row">
             <div class="col-12 mb-3">
               <label for="Zip5" class="form-label text-black-50">Zip code</label>
-              <input class="form-control" name="Zip5" id="Zip5" required minlength="5" maxlength="5" placeholder="Zip code" autocomplete="postal-code" value="94555"/>
+              <input class="form-control" name="Zip5" id="Zip5" required minlength="5" maxlength="5" placeholder="Zip code" autocomplete="postal-code"/>
               <div class="invalid-feedback"> Please fill zip-code 5 digits </div>
             </div>
           </div>
